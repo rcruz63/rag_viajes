@@ -41,9 +41,9 @@ Esta fase es crucial para asegurar que la información de los PDFs se extrae de 
 
 * **Objetivo:** Establecer la estructura del proyecto y asegurar que todas las herramientas básicas están instaladas y configuradas.
 * **Hitos:**
-  * Creación de un repositorio de GitHub. Es este repositorio.
-  * Creación de un entorno virtual de Python.
-  * Instalación de dependencias básicas (fastapi, uvicorn, pydantic, openai, supabase-py, langchain, langfuse, click, pytest, python-dotenv).
+  * Creación de un repositorio de GitHub. Es este repositorio: [RAG Viajes](https://github.com/rcruz63/rag_viajes)
+  * Creación de un entorno virtual de Python. Estamos usando `uv` para gestiornar el entorno virtual.
+  * Instalación de dependencias básicas (fastapi, uvicorn, pydantic, openai, supabase, langchain, langfuse, click, pytest, python-dotenv).
   * Configuración de variables de entorno para API Keys (OpenAI, Supabase, Langfuse).
 * **Acciones:**
   * Crea el repositorio en GitHub.
@@ -54,7 +54,7 @@ Esta fase es crucial para asegurar que la información de los PDFs se extrae de 
 * **Prompt para el Asistente de Código (para `requirements.txt`, `config.py` y `cli.py`):**
 
     ```text
-    "Necesito configurar un proyecto Python para un chatbot RAG. Genera un archivo `requirements.txt` que incluya las siguientes librerías: `fastapi`, `uvicorn`, `pydantic`, `openai`, `supabase-py`, `langchain`, `langfuse`, `click`, `pytest`, `python-dotenv`. Luego, crea un archivo `config.py` para cargar de forma segura las API Keys de OpenAI, Supabase y Langfuse desde un archivo `.env`. Finalmente, crea un esqueleto inicial para un `cli.py` usando `click` con un comando simple como `hello`."
+    "Necesito configurar un proyecto Python para un chatbot RAG. Genera un archivo `requirements.txt` que incluya las siguientes librerías: `fastapi`, `uvicorn`, `pydantic`, `openai`, `supabase`, `langchain`, `langfuse`, `click`, `pytest`, `python-dotenv`. Luego, crea un archivo `config.py` para cargar de forma segura las API Keys de OpenAI, Supabase y Langfuse desde un archivo `.env`. Finalmente, crea un esqueleto inicial para un `cli.py` usando `click` con un comando simple como `hello`."
     ```
 
 * **Prompt para el Asistente de Código (para `test_config.py`):**
@@ -731,14 +731,14 @@ CREATE INDEX ON chunks_catalogos USING ivfflat (embedding vector_l2_ops) WITH (l
 
 #### B.5. Uso de `pgvector` en Python (Lado de la Aplicación)
 
-Desde tu aplicación Python, interactuarás con `pgvector` a través de la librería `supabase-py` (que a su vez utiliza un cliente PostgreSQL como `psycopg2` o `asyncpg` internamente).
+Desde tu aplicación Python, interactuarás con `pgvector` a través de la librería `supabase` (que a su vez utiliza un cliente PostgreSQL como `psycopg2` o `asyncpg` internamente).
 
 1. **Instalación de Librerías**:
-   * Ya las tienes en tu `requirements.txt`: `supabase-py`
-   * `supabase-py` maneja la serialización/deserialización de los objetos `VECTOR` automáticamente con PostgreSQL, siempre y cuando la extensión esté habilitada y la columna esté definida correctamente. No necesitas una librería `pgvector` separada en Python.
+   * Ya las tienes en tu `requirements.txt`: `supabase`
+   * `supabase` maneja la serialización/deserialización de los objetos `VECTOR` automáticamente con PostgreSQL, siempre y cuando la extensión esté habilitada y la columna esté definida correctamente. No necesitas una librería `pgvector` separada en Python.
 
 2. **Envío de Embeddings a Supabase**:
-    Cuando insertas datos en la tabla `chunks_catalogos`, simplemente pasas una lista o un array de floats (Python list, NumPy array) para la columna `embedding`. La librería `supabase-py` se encargará de convertirlo al formato `VECTOR` de PostgreSQL.
+    Cuando insertas datos en la tabla `chunks_catalogos`, simplemente pasas una lista o un array de floats (Python list, NumPy array) para la columna `embedding`. La librería `supabase` se encargará de convertirlo al formato `VECTOR` de PostgreSQL.
 
     ```python
     # Ejemplo conceptual de inserción
@@ -793,7 +793,7 @@ Desde tu aplicación Python, interactuarás con `pgvector` a través de la libre
     # data = response.data
     ```
 
-    **Nota sobre la sintaxis de la consulta**: En la búsqueda de similitud, la forma más común es `ORDER BY <vector_column> <-> <query_vector> LIMIT K`. Al usar `supabase-py`, debes asegurarte de que el `query_vector` se serialice correctamente a una cadena que PostgreSQL pueda interpretar como un array de números. `str(list(query_embedding))` es una forma común de hacerlo si `query_embedding` es un array de NumPy.
+    **Nota sobre la sintaxis de la consulta**: En la búsqueda de similitud, la forma más común es `ORDER BY <vector_column> <-> <query_vector> LIMIT K`. Al usar `supabase`, debes asegurarte de que el `query_vector` se serialice correctamente a una cadena que PostgreSQL pueda interpretar como un array de números. `str(list(query_embedding))` es una forma común de hacerlo si `query_embedding` es un array de NumPy.
 
 #### B.6. Consideraciones de Coste y Rendimiento
 
