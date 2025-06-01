@@ -1,3 +1,4 @@
+# pyproject.toml
 [project]
 name = "rag-viajes"
 version = "0.1.0"
@@ -16,3 +17,16 @@ dependencies = [
     "supabase>=2.15.2",
     "uvicorn>=0.34.3",
 ]
+
+# **Añade estas secciones:**
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"] # Esto le dice a setuptools que busque paquetes en el directorio 'src'
+
+# Puedes mantener esta sección de pytest, aunque con la instalación editable, a menudo no es estrictamente necesaria para la importación,
+# pero puede ser útil para otras configuraciones de pytest.
+[tool.pytest.ini_options]
+pythonpath = ["src"] # Aunque lo mantenemos, la instalación editable es la clave aquí.

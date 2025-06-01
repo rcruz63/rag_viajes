@@ -43,7 +43,7 @@ Esta fase es crucial para asegurar que la información de los PDFs se extrae de 
 * **Hitos:**
   * Creación de un repositorio de GitHub. Es este repositorio: [RAG Viajes](https://github.com/rcruz63/rag_viajes)
   * Creación de un entorno virtual de Python. Estamos usando `uv` para gestiornar el entorno virtual.
-  * Instalación de dependencias básicas (fastapi, uvicorn, pydantic, openai, supabase, langchain, langfuse, click, pytest, python-dotenv).
+  * Instalación de dependencias básicas (fastapi, uvicorn, pydantic, openai, supabase, langchain, langfuse, click, pytest, python-dotenv). **Done**
   * Configuración de variables de entorno para API Keys (OpenAI, Supabase, Langfuse).
 * **Acciones:**
   * Crea el repositorio en GitHub.
