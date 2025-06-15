@@ -4,14 +4,18 @@ name = "rag-viajes"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = [
-    "click>=8.2.1",
+    "click <8.2.0",
+    "docetl>=0.2.4",
     "fastapi>=0.115.12",
     "langchain>=0.3.25",
     "langfuse>=2.60.7",
     "openai>=1.82.1",
+    "pandas>=2.3.0",
+    "pathlib>=1.0.1",
     "pydantic>=2.11.5",
+    "pymupdf4llm>=0.0.24",
     "pytest>=8.3.5",
     "python-dotenv>=1.1.0",
     "supabase>=2.15.2",

@@ -4,6 +4,7 @@ langchain==0.3.25
 langfuse==2.60.7
 openai==1.82.1
 pydantic==2.11.5
+pymupdf==1.23.26
 pytest==8.3.5
 python-dotenv==1.1.0
 supabase==2.15.2
